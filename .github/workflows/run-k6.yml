@@ -1,0 +1,19 @@
+name: Run Second K6 Server
+on:
+  workflow_dispatch:
+
+jobs:
+  stress_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup K6
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y k6
+          ulimit -n 250000
+
+      - name: Run Attack
+        run: k6 run stress_part.js

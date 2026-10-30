@@ -9,7 +9,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Download and Run K6
-        run: |
-          curl -L https://github.com | tar -xz
-          ./k6-v0.51.0-linux-amd64/k6 run stress_part.js
+      - name: Setup K6 Officially
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run Attack Script
+        run: k6 run stress_part.js
